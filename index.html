@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        color: var(--textcolor);
+      }
+      :root {
+        --bgcolor: #11151c;
+        --button: #212d40;
+        --textcolor: #364156;
+      }
+      body {
+        background: var(--bgcolor);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+      }
+      .container {
+        box-shadow: 0px 1px 10px black;
+        /*border: 1px solid var(--button);*/
+        margin-top: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 600px;
+        height: 400px;
+        border-radius: 20px;
+        gap: 20px;
+        z-index: 1;
+      }
+      .password {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+      }
+      h1 {
+        font-weight: bolder;
+      }
+      input {
+        border: none;
+        width: 300px;
+        height: 50px;
+        border-radius: 5px;
+        padding: 0 20px;
+      }
+      input:focus {
+        outline: none;
+      }
+      button {
+        width: 250px;
+        height: 40px;
+        border-radius: 20px;
+        border: none;
+        background: var(--button);
+        color: white;
+      }
+      button:hover {
+        opacity: 0.5;
+        transform: translateY(-5px);
+        transition: ease-in-out 300ms;
+      }
+      #result {
+        color: green;
+        font-size: 30px;
+        font-weight: bolder;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="password">
+        <h1>THE ULTIMATE AUTHENTICATOR</h1>
+        <input type="password" placeholder="Enter password" id="input" />
+        <button onclick="passwordAutenticty()">Check Password</button>
+      </div>
+      <div id="result"></div>
+    </div>
+  </body>
+  <script>
+    function passwordAutenticty() {
+      const code = document.getElementById("input").value;
+      let password = code.split("");
+      const upperCase = [
+        `A`,
+        `B`,
+        `C`,
+        `D`,
+        `E`,
+        `F`,
+        `G`,
+        `H`,
+        `I`,
+        `J`,
+        `K`,
+        `L`,
+        `M`,
+        `N`,
+        `O`,
+        `P`,
+        `Q`,
+        `R`,
+        `S`,
+        `T`,
+        `U`,
+        `V`,
+        `W`,
+        `X`,
+        `Y`,
+        `Z`,
+      ];
+      var lowerCase = upperCase.map((str) => str.toLowerCase());
+      let numbers = [`0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`];
+      const signs = [
+        `!`,
+        `@`,
+        `#`,
+        `$`,
+        `%`,
+        `^`,
+        `&`,
+        `(`,
+        `)`,
+        `_`,
+        `-`,
+        `=`,
+        `+`,
+        `?`,
+        `/`,
+        `,`,
+        `:`,
+        `;`,
+        `'`,
+        `|`,
+      ];
+      let length = false;
+      let hasUppercase = false;
+      let hasLowercase = false;
+      let hasNumbers = false;
+      let hasSigns = false;
+      for (i = 0; i < password.length; i++) {
+        if (upperCase.includes(password[i])) {
+          hasUppercase = true;
+        }
+        if (password.length > 8) {
+          length = true;
+        }
+        if (lowerCase.includes(password[i])) {
+          hasLowercase = true;
+        }
+        if (numbers.includes(password[i])) {
+          hasNumbers = true;
+        }
+        if (signs.includes(password[i])) {
+          hasSigns = true;
+        }
+      }
+      if (
+        length === true &&
+        hasUppercase === true &&
+        hasLowercase === true &&
+        hasSigns === true &&
+        hasSigns === true
+      ) {
+        document.getElementById("result").innerText = `Password is strong`;
+      } else if (code === "") {
+        document.getElementById("result").innerText = `Enter a password`;
+      } else {
+        document.getElementById("result").innerText = `Password is weak`;
+      }
+    }
+  </script>
+</html>
